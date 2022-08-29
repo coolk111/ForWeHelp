@@ -3,28 +3,40 @@ let main;
 let scheduleID;
 
 window.onload = function() {
-    let title_1 = document.getElementById("title-1");
-    title_1.style.borderBottomLeftRadius= "0px";
-    title_1.style.borderBottomRightRadius= "0px";
+    // let title_1 = document.getElementById("title-1");
+    // title_1.style.borderBottomLeftRadius= "0px";
+    // title_1.style.borderBottomRightRadius= "0px";
 
-    let answer_1 = document.getElementById("answer-1");
-    answer_1.style.display = "block";
+    // let answer_1 = document.getElementById("answer-1");
+    // answer_1.style.display = "block";
 
     main = document.getElementById("main");
     play();
 };
 
+function answer_area(on_off) {
+    let answer = document.getElementsByClassName("answer");
+    for(let i=0; i<answer.length; i++) {
+        answer[i].style.display = on_off;
+    }
+}
+
 function autoPlay() {
+    // The "scrollHeight" property returns the height of an element including padding,
+    // but excluding borders, scrollbars, or margins.
+    if(main.scrollTop >= (main.scrollHeight - main.clientHeight)) {
+        main.scrollTop = 0;
+    }
     main.scrollTop++;
 }
 
 function play() {
     main.style.overflow = "hidden";
+    answer_area("block");
     scheduleID = window.setInterval(autoPlay, 50);
 }
 
 function pause() {
-    main.style.overflow = "auto";
     clearInterval(scheduleID);
 }
 
@@ -32,6 +44,11 @@ function stop() {
     main.style.overflow = "auto";
     clearInterval(scheduleID);
     main.scrollTop = 0;
+    answer_area("none");
+    // let answer = document.getElementsByClassName("answer");
+    // for(let i=0; i<answer.length; i++) {
+    //     answer[i].style.display = "none";
+    // }
 }
 
 function ans(number) {
