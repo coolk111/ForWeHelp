@@ -1,15 +1,9 @@
 let current_id = 1;
 let main;
 let scheduleID;
+let playFlag = true; // 設計用來防止一直點擊 Play button，造成捲軸捲動越來越快
 
 window.onload = function() {
-    // let title_1 = document.getElementById("title-1");
-    // title_1.style.borderBottomLeftRadius= "0px";
-    // title_1.style.borderBottomRightRadius= "0px";
-
-    // let answer_1 = document.getElementById("answer-1");
-    // answer_1.style.display = "block";
-
     main = document.getElementById("main");
     play();
 };
@@ -33,11 +27,15 @@ function autoPlay() {
 function play() {
     main.style.overflow = "hidden";
     answer_area("block");
-    scheduleID = window.setInterval(autoPlay, 50);
+    if (playFlag) {
+        scheduleID = window.setInterval(autoPlay, 50);
+        playFlag = false;
+    }
 }
 
 function pause() {
     clearInterval(scheduleID);
+    playFlag = true;
 }
 
 function stop() {
@@ -45,32 +43,25 @@ function stop() {
     clearInterval(scheduleID);
     main.scrollTop = 0;
     answer_area("none");
-    // let answer = document.getElementsByClassName("answer");
-    // for(let i=0; i<answer.length; i++) {
-    //     answer[i].style.display = "none";
-    // }
+    let answer_1 = document.getElementById("answer-1");
+    answer_1.style.display = "block";
+    current_id = 1;
+    playFlag = true;
 }
 
 function ans(number) {
-    let open_title_id = document.getElementById("title-" + number);
     let open_answer_id = document.getElementById("answer-" + number);
-    let close_title_id = document.getElementById("title-" + current_id);
     let close_answer_id = document.getElementById("answer-" + current_id);
 
-    if(open_answer_id.style.display != "block"){
+    if(open_answer_id.style.display != "block") {
         open_answer_id.style.display = "block";
-        if(number != current_id) {
+        if(number != current_id) { // 點擊不同問題，要關閉之前問題的答案區塊
             close_answer_id.style.display = "none";
-            close_title_id.style.borderBottomLeftRadius = "10px"; 
-            close_title_id.style.borderBottomRightRadius = "10px";
-            current_id = number;
+            current_id = number; // 把最新點開的問題號碼，更新到 current_id
         }
-        open_title_id.style.borderBottomLeftRadius = "0px"; 
-        open_title_id.style.borderBottomRightRadius = "0px";
-    }else{
+    }
+    else {
         open_answer_id.style.display = "none";
-        open_title_id.style.borderBottomLeftRadius = "10px"; 
-        open_title_id.style.borderBottomRightRadius = "10px";
     }
 }
 
@@ -88,12 +79,14 @@ function mode(){
         mode.innerText = "Light";
         mode.style.backgroundColor = "white";
         mode.style.color = "black";
+        main.style.boxShadow = "0px 0px 10px #ffffff";
         document.body.style.backgroundColor = "black";
     }
     else {
         mode.innerText = "Dark";
         mode.style.backgroundColor = "pink";
         mode.style.color = "white";
+        main.style.boxShadow = "0px 0px 10px #000000";
         document.body.style.backgroundColor = "white";
     }
 }

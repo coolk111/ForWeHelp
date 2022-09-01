@@ -5,7 +5,6 @@ body {
 
 header {
     position: fixed; width: 100%;
-    /*margin-bottom: 20px;*/
     background-color:rgb(22, 5, 83);
     box-shadow: 0 4px 8px 0 rgba(122, 116, 185, 0.2);
     padding: 8px;
@@ -33,9 +32,7 @@ header>#mode {
 main {
     width: 80%; height: 500px;
     overflow: hidden;
-	margin: auto;
-    /* margin-left: auto; margin-right: auto; */
-    /* border: 1px solid red; */
+	margin: auto; /* margin-left: auto; margin-right: auto; */
     border-radius: 10px;
     box-shadow: 0px 0px 10px #000000; padding: 2px;
 }
@@ -66,8 +63,6 @@ main {
 
 .title {
     background-color: pink;
-    /*border-radius: 10px;*/
-    border-top-left-radius: 10px; border-top-right-radius: 10px;
     font-size: 23px;
     font-weight: bold;
     padding: 8px;
@@ -80,12 +75,10 @@ div>span {
 
 .answer {
     background-color: rgb(240, 219, 239);
-    border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;
     font-size: 20px;
     padding-top: 5px; padding-bottom: 5px;
     padding-left: 25px; padding-right: 25px;
     margin-bottom: 8px;
-    /*display: none;*/
 }
 
 @media screen and (max-width:500px){
