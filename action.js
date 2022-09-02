@@ -16,9 +16,9 @@ function answer_area(on_off) {
 }
 
 function autoPlay() {
-    // The "scrollHeight" property returns the height of an element including padding,
-    // but excluding borders, scrollbars, or margins.
-    if(main.scrollTop >= (main.scrollHeight - main.clientHeight)) {
+    // clientWidth, clientHeight 是元素所包含的「子元素」的寬度及高度，其中包含了padding，但不包含邊界及捲軸。
+    // scrollWidth/scrollHeight 也是元素所包含的「子元素」的「完整」寬度和高度，其中包含了超出捲軸之外的部分的寬度與高度。在沒有捲軸的情況下，這個值就等於 clientWidth/clientHeight。
+    if(main.scrollTop >= (main.scrollHeight - main.clientHeight)) { // 捲軸能捲動的距離
         main.scrollTop = 0;
     }
     main.scrollTop++;
@@ -28,7 +28,7 @@ function play() {
     main.style.overflow = "hidden";
     answer_area("block");
     if (playFlag) {
-        scheduleID = window.setInterval(autoPlay, 50);
+        scheduleID = window.setInterval(autoPlay, 70);
         playFlag = false;
     }
 }
