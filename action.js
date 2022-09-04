@@ -4,6 +4,19 @@ let scheduleID;
 let playFlag = true; // 設計用來防止一直點擊 Play button，造成捲軸捲動越來越快
 
 window.onload = function() {
+    function getAns() {
+        fetch("https://coolk111.github.io/ForWeHelp/answer.json").then(function(response) {
+            return response.json();
+        }).then(function(ansData) {
+            // console.log(ansData);
+            for(let i=0;i<ansData.length;i++) {
+                let answer = document.getElementById("answer-"+ (i+1));
+                answer.innerHTML = ansData[i].ans;
+            }
+        });
+    };
+    getAns();
+
     main = document.getElementById("main");
     play();
 };
